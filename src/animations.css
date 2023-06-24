@@ -1,0 +1,41 @@
+.brightness-animate {
+  animation-name: brightness;
+  animation-duration: 300ms;
+}
+
+.bounce-animate {
+  animation-name: bounce;
+  animation-duration: 300ms;
+}
+
+@keyframes brightness {
+  0% {
+    filter: brightness(100%);
+  }
+
+  50% {
+    filter: brightness(105%);
+  }
+
+  100% {
+    filter: brightness(100%);
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: scale(100%);
+  }
+
+  50% {
+    transform: scale(105%);
+  }
+
+  75% {
+    transform: scale(95%);
+  }
+
+  100% {
+    transform: scale(100%);
+  }
+}

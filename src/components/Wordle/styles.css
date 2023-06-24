@@ -1,0 +1,27 @@
+.wordle {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 16px 0;
+  padding-bottom: 96px;
+  gap: 22px;
+}
+
+.--NOT_INCLUDED {
+  background-color: var(--dark-color) !important;
+}
+
+.--INCLUDED {
+  background-color: var(--warning-color) !important;
+}
+
+.--IN_SPOT {
+  background-color: var(--success-color) !important;
+}
+
+.--INCLUDED,
+.--IN_SPOT,
+.--NOT_INCLUDED {
+  color: white !important;
+}

@@ -1,0 +1,31 @@
+@import url("./animations.css");
+
+:root {
+  --light-color: #f8f9fa;
+  --dark-color: #343a40;
+  --danger-color: #dc3545;
+  --warning-color: #ffc107;
+  --success-color: #28a745;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 100vh;
+  width: 360px;
+}
+
+.dashed {
+  border-style: dashed;
+}

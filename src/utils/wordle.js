@@ -2,6 +2,7 @@ import { getRandomElement } from "./functions";
 import words from "./words.json";
 
 export const WORD_LENGTH = 5;
+export const MAX_PLAYS = 6;
 
 export const getRandomWord = () => {
   return getRandomElement(words);
@@ -37,36 +38,29 @@ export const verifyInput = (word) => {
 
 export function matchWordle(hint, answer) {
   const statuses = [];
+  const memo = {};
 
-  for (let i = 0; i < hint.length; i++) {
-    const matches = [...answer.matchAll(hint[i])];
-    let status = "NOT_INCLUDED";
-
-    if (matches.length) {
-      for (let match of matches) {
-        const index = match["index"];
-        const letter = match[0];
-
-        if (hint[index] == letter) {
-          if (!statuses[index]) {
-            status = "IN_SPOT";
-          }
-        } else {
-          status = "INCLUDED";
-        }
-
-        statuses.push(status);
-      }
+  for (
+    let hintLetterIndex = 0;
+    hintLetterIndex < hint.length;
+    hintLetterIndex++
+  ) {
+    if (hint[hintLetterIndex] == answer[hintLetterIndex]) {
+      statuses.push([hint[hintLetterIndex], "IN_SPOT"]);
     } else {
-      statuses.push(status);
+      if (!(hint[hintLetterIndex] in memo)) {
+        memo[hint[hintLetterIndex]] = answer.indexOf(hint[hintLetterIndex]);
+      }
+
+      const index = memo[hint[hintLetterIndex]];
+
+      if (index >= 0) {
+        statuses.push([hint[hintLetterIndex], "INCLUDED"]);
+      } else {
+        statuses.push([hint[hintLetterIndex], "NOT_INCLUDED"]);
+      }
     }
   }
 
-  const result = {};
-
-  for (let i = 0; i < hint.length; i++) {
-    result[hint[i]] = statuses[i];
-  }
-
-  return result;
+  return statuses;
 }

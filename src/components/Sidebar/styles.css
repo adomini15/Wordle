@@ -1,0 +1,29 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--light-color);
+  min-width: 290px;
+}
+
+.user {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+}
+
+.user__username {
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--dark-color);
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.user__title {
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: capitalize;
+  color: rgb(193 193 193);
+}

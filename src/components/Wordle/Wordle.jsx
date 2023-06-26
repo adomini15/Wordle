@@ -36,24 +36,25 @@ const keyNames = [
 ];
 
 function Wordle({ className }) {
+  const [textHint, setTextHint] = useState("");
+
   const {
     message,
     isInvalid,
     WORD_LENGTH,
+    MAX_PLAYS,
+    gameOver,
+    won,
+    plays,
     checkAndMatch,
     cleanMessagesAndValidations,
-  } = useWordle();
-  const [textHint, setTextHint] = useState("");
-  const [attemps, setAttemps] = useState([]);
+  } = useWordle(); // WORDLE
 
   const handlePressKey = (key) => {
     cleanMessagesAndValidations();
 
     if (key == "ENTER") {
-      const feedback = checkAndMatch(textHint);
-
-      if (feedback) {
-        setAttemps([...attemps, feedback]);
+      if (checkAndMatch(textHint)) {
         setTextHint("");
       }
     } else if (key == "DELETE") {
@@ -67,19 +68,26 @@ function Wordle({ className }) {
     <div className={`wordle ${className}`}>
       <Playground
         maxLetters={WORD_LENGTH}
-        maxAttemps={6}
+        maxAttemps={MAX_PLAYS}
         hint={textHint}
-        attemps={attemps}
+        attemps={plays}
       />
       <Keyboard>
-        {keyNames.map((keyName) => (
-          <Key
-            key={keyName}
-            name={keyName}
-            onPress={handlePressKey}
-            className={`--${attemps[attemps.length - 1]?.[keyName] ?? ""}`}
-          />
-        ))}
+        {keyNames.map((keyName) => {
+          const className = `--${
+            plays[plays.length - 1]?.find(([name]) => name == keyName)?.[1] ??
+            ""
+          }`;
+
+          return (
+            <Key
+              key={keyName}
+              name={keyName}
+              onPress={handlePressKey}
+              className={className}
+            />
+          );
+        })}
       </Keyboard>
 
       {isInvalid && (

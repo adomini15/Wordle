@@ -13,7 +13,3 @@ export function getRandomElement(array) {
 
   return array[randomIndex];
 }
-
-export function saveCookie(name, data) {}
-
-export function getCookie(name) {}

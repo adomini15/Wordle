@@ -19,16 +19,14 @@ const Letter = ({ status, content }) => {
 
 const Word = ({ maxLetters, attemp, hint }) => {
   const letters = [];
-  const keysAttemp = attemp && Object.keys(attemp);
 
   for (let i = 0; i < maxLetters; i++) {
     const props = {
       key: i,
     };
 
-    if (keysAttemp) {
-      const letter = keysAttemp[i];
-      const status = attemp[letter];
+    if (attemp) {
+      const [letter, status] = attemp[i];
 
       props["status"] = status;
       props["content"] = letter;
